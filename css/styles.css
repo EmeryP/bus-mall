@@ -1,3 +1,16 @@
 body{
-  background: red;
+  
+}
+
+#imgPlace{
+  float: left;
+  margin: 30px;
+  width: 300px;
+  height: 350px;
+  border: 3px solid black;
+}
+
+#results{
+  float: left;
+  margin: 0px 30px;
 }
