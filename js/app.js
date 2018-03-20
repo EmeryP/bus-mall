@@ -6,13 +6,13 @@
 Products.allProducts = [];
 
 //populated with 3 random filepaths
-var viewedArray = []; 
+var viewedArray = [];
 
 // photo views array
-var photoViews = [];
+// var photoViews = [];
 
 // photo names array
-var photoNames = [];
+// var photoNames = [];
 
 
 // access the elememts from the DOM
@@ -24,8 +24,8 @@ viewedArray[2] = document.getElementById('product-pic3');
 function Products(filepath, name){
   this.filepath = filepath;
   this.name = name;
-  this.views = views;
-  this.votes = votes;
+  // this.views = views;
+  // this.votes = votes;
   Products.allProducts.push(this);
 }
 
@@ -53,28 +53,39 @@ new Products('img/water-can.jpg', 'water-can');
 new Products('img/wine-glass.jpg', 'wine-glass');
 
 // add an event listener
-viewedArray[0].addEventListener('click', randomNumberGenerator);
-viewedArray[1].addEventListener('click', randomNumberGenerator);
-viewedArray[2].addEventListener('click', randomNumberGenerator);
+viewedArray[0].addEventListener('click', randomPhoto);
+viewedArray[1].addEventListener('click', randomPhoto);
+viewedArray[2].addEventListener('click', randomPhoto);
 
+var lastIndices = [];
 
 function randomPhoto(){
 
-  while (viewedArray.length < 3){
+  var randomIndices = [];
 
-      var randomIndex = Math.floor(Math.random() * Products.allProducts.length);
+  for(var i = 0; i < 3; i++){
+
+    var randomIndex = Math.floor(Math.random() * Products.allProducts.length);
+
+    if(randomIndices.includes(randomIndex) || lastIndices.includes(randomIndex)) {
+      i--;
+    } else{
+
       // use the randomIndex to set the src and alt attributes of the imgElement
       viewedArray[i].src = Products.allProducts[randomIndex].filepath; //overwrite random number from array with filepath
       viewedArray[i].alt = Products.allProducts[randomIndex].name;
-      
-      viewedArray.forEach(){ //use for each here
-        if (condition) {
-          
-        } else {
-        viewedArray.push(randomIndex);
+      randomIndices.push(randomIndex);
     }
+
   }
+  lastIndices = randomIndices;
+  console.log(lastIndices);
 }
 
 randomPhoto();
 console.log(viewedArray);
+
+
+// build click listener 
+
+// event.target.currentSRC // referencing image clicked 
