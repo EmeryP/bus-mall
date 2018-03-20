@@ -87,19 +87,20 @@ function randomPhoto(){
     }
   }
   lastIndices = randomIndices;
-  // console.log(lastIndices);
+
+  Products.allProducts[randomIndex].timesDisplayed++;
 }
 
 
-function handleClick(){
+// function handleClick(){
 
-    // use a for loop to determine which goat img was actually clicked on
-    for(var i in Goat.allGoats) {
-      if(event.target.alt === Goat.allGoats[i].name) {
-        Goat.allGoats[i].votes++;
-      }
-    }
-}
+//     // use a for loop to determine which goat img was actually clicked on
+//     for(var i in Goat.allGoats) {
+//       if(event.target.alt === Goat.allGoats[i].name) {
+//         Goat.allGoats[i].votes++;
+//       }
+//     }
+// }
 
 
 
