@@ -43,13 +43,14 @@ new Products('img/wine-glass.jpg', 'wine-glass');
 
 // access the elememts from the DOM
 viewedArray[0] = document.getElementById('product-pic1'); //put viewed array into product pic1
-// var imgElement2 = document.getElementById('product-pic2');
-// var viewedArray[2] = document.getElementById('product-pic3');
+viewedArray[1] = document.getElementById('product-pic2');
+viewedArray[2] = document.getElementById('product-pic3');
 
 
 // add an event listener
 viewedArray[0].addEventListener('click', randomNumberGenerator);
-// viewedArray[1].addEventListener('click', randomPic);
+viewedArray[1].addEventListener('click', randomNumberGenerator);
+viewedArray[2].addEventListener('click', randomNumberGenerator);
 // imgElement.addEventListener('click', randomPic);
 
 
@@ -72,17 +73,23 @@ viewedArray[0].addEventListener('click', randomNumberGenerator);
 
 function randomNumberGenerator(){
 
-  for(var i = 0; i < 7; i++) {
+  for(var i = 0; i < 3; i++) {
 
     var randomIndex = Math.floor(Math.random() * Products.allProducts.length);
     // use the randomIndex to set the src and alt attributes of the imgElement
-    viewedArray[0].src = Products.allProducts[randomIndex].filepath; //overwrite random number from array with filepath
-    // imgElement2.alt = Products.allProducts[randomIndex].name;
+    viewedArray[i].src = Products.allProducts[randomIndex].filepath; //overwrite random number from array with filepath
+    viewedArray[i].alt = Products.allProducts[randomIndex].name;
 
-    // while (i === viewedArray[i]) {
-    //   i++;
-    // }
     viewedArray.push(randomIndex);
+
+    if (viewedArray[i].src === viewedArray[0].src || viewedArray[i].src === viewedArray[1].src || viewedArray[i].src === viewedArray[2].src) {
+
+      randomIndex = Math.floor(Math.random() * Products.allProducts.length);
+      //   // use the randomIndex to set the src and alt attributes of the imgElement
+      viewedArray[i].src = Products.allProducts[randomIndex].filepath; //overwrite random number from array with filepath
+      viewedArray[i].alt = Products.allProducts[randomIndex].name;
+    } else { viewedArray.push(randomIndex);
+    }
   }
 }
 
