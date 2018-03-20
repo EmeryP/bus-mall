@@ -1,5 +1,7 @@
 'use strict';
 
+'use strict';
+
 // array to hold photo objects
 Products.allProducts = [];
 
@@ -73,25 +75,66 @@ viewedArray[2].addEventListener('click', randomNumberGenerator);
 
 function randomNumberGenerator(){
 
-  for(var i = 0; i < 3; i++) {
+  // while (viewedArray.length < 3){
 
-    var randomIndex = Math.floor(Math.random() * Products.allProducts.length);
-    // use the randomIndex to set the src and alt attributes of the imgElement
-    viewedArray[i].src = Products.allProducts[randomIndex].filepath; //overwrite random number from array with filepath
-    viewedArray[i].alt = Products.allProducts[randomIndex].name;
+    for(var i = 0; i < 3; i++) {
 
-    viewedArray.push(randomIndex);
-
-    if (viewedArray[i].src === viewedArray[0].src || viewedArray[i].src === viewedArray[1].src || viewedArray[i].src === viewedArray[2].src) {
-
-      randomIndex = Math.floor(Math.random() * Products.allProducts.length);
-      //   // use the randomIndex to set the src and alt attributes of the imgElement
+      var randomIndex = Math.floor(Math.random() * Products.allProducts.length);
+      // use the randomIndex to set the src and alt attributes of the imgElement
       viewedArray[i].src = Products.allProducts[randomIndex].filepath; //overwrite random number from array with filepath
       viewedArray[i].alt = Products.allProducts[randomIndex].name;
-    } else { viewedArray.push(randomIndex);
+      
+
+      
+      // } else { 
+        viewedArray.push(randomIndex);
+
     }
+    
   }
-}
+
+
+
+// function randomNumberGenerator(){
+
+  // var iCount = 0; //sets count to 0
+
+  // for(var i = 0; i < 3; i++) { //runs following code until condition is met
+
+  // var randomIndex = Math.floor(Math.random() * Products.allProducts.length);
+  // // use the randomIndex to set the src and alt attributes of the imgElement
+  // viewedArray[0].src = Products.allProducts[randomIndex].filepath; //overwrite random number from array with filepath
+  // viewedArray[0].alt = Products.allProducts[randomIndex].name;
+
+  // viewedArray.push(randomIndex);
+
+  // for (var i = iCount; i < viewedArray.length; i++) { //use to iterate over and compare value to viewed array
+  //   var randomIndex2 = Math.floor(Math.random() * Products.allProducts.length);
+  //   // use the randomIndex to set the src and alt attributes of the imgElement
+  //   viewedArray[i].src = Products.allProducts[randomIndex2].filepath; //overwrite random number from array with filepath
+  //   viewedArray[i].alt = Products.allProducts[randomIndex2].name;
+
+  // while (randomIndex2 !== viewedArray[0] && viewedArray.length < 3) {
+  //   var randomIndex2 = Math.floor(Math.random() * Products.allProducts.length);
+  //   // use the randomIndex to set the src and alt attributes of the imgElement
+  //   viewedArray[i].src = Products.allProducts[randomIndex2].filepath; //overwrite random number from array with filepath
+  //   viewedArray[i].alt = Products.allProducts[randomIndex2].name;
+  // }
+
+  // for (var i = iCount; i < viewedArray.length; i++) {
+  //   randomIndex2 = Math.floor(Math.random() * Products.allProducts.length);
+  //   // if (randomIndex2 !== j) {
+  //   viewedArray.push(randomIndex2);
+  //   // } else if (randomIndex2 === j){
+
+  //   // }
+  //   iCount++;
+  //   // }
+  // }
+// }
+
+
+
 
 randomNumberGenerator();
 console.log(viewedArray);
