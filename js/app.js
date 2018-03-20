@@ -39,6 +39,8 @@ function Products(filepath, name){
   photoNames.push(this.name);
 }
 
+////////////////////////////////////////////////////////////////////////////////
+
 // new instances of photos
 new Products('img/bag.jpg', 'bag'); //store views, clicks, id, in separate var and place here
 new Products('img/banana.jpg', 'banana');
@@ -66,6 +68,8 @@ viewedArray[0].addEventListener('click', randomPhoto);
 viewedArray[1].addEventListener('click', randomPhoto);
 viewedArray[2].addEventListener('click', randomPhoto);
 
+//////////////////////////////////////////////////////////////////////////////////////
+
 // function to run when random photo is called
 function randomPhoto(){
 
@@ -82,33 +86,76 @@ function randomPhoto(){
       viewedArray[i].src = Products.allProducts[randomIndex].filepath;
       viewedArray[i].alt = Products.allProducts[randomIndex].name;
       randomIndices.push(randomIndex);
-      // Products.allProducts.timesDisplayed++;
-      // console.log(Products.allProducts.timesDisplayed);
     }
   }
+  //updates last indicies to equal random indicies so it can be referenced on next call
   lastIndices = randomIndices;
-
+  //updates timesDisplayed counter by referencing randomIndex
+  // Products.allProducts[randomIndex].timesDisplayed++;
   Products.allProducts[randomIndex].timesDisplayed++;
+  
 }
 
+////////////////////////////////////////////////////////////////////////////////////////
 
-// function handleClick(){
+// function to call upon click event
+function handleClick(event) {
+  // increment click counter
+  Products.totalClicks++;
 
-//     // use a for loop to determine which goat img was actually clicked on
-//     for(var i in Goat.allGoats) {
-//       if(event.target.alt === Goat.allGoats[i].name) {
-//         Goat.allGoats[i].votes++;
-//       }
-//     }
-// }
+  // increment clicks/votes on the specific image
+  console.log(event.target.alt);
 
+  // use a for loop to determine which product img was actually clicked on
+  for(var i in Products.allProducts) {
+    if(event.target.alt === Products.allProducts[i].name) {
+      Products.allProducts[i].votes++;
+    }
+  }
 
+  // check the click counter
+  if(Products.totalClicks > 9) {
+    // turn off event listener
+    sectionElement.removeEventListener('click', handleClick);
 
+    // if greater than 9, display results as a list
+    showResults();
 
+    // updates the votes per goat for chart
+    updateVotes();
+
+    // display the chart
+    // renderChart();
+  } else {
+    // if less than 10, display a new set of random goat images
+    randomPhoto();
+  }
+}
+///////////////////////////////////////////////////////////////
+
+function showResults(){
+  for(var i in Products.allProducts) {
+    // create the element(li)
+    var listItemElement = document.createElement('li');
+    // give it content
+    listItemElement.textContent = Products.allProducts[i].name + '  has' + Products.allProducts[i].votes + ' votes and was displayed ' + Products.allProducts[i].timesDisplayed + ' times.';
+
+    //append to its parent element
+    unorderedListElement.appendChild(listItemElement);
+  }
+}
+////////////////////////////////////////////////////////////
+function updateVotes(){
+  for(var i in Products.allProducts) {
+    photoVotes[i] = Products.allProducts[i].votes;
+  }
+}
+////////////////////////////////////////////////////////////
+
+// add event listener to the section
+sectionElement.addEventListener('click', handleClick);
+
+//render images on page load
 randomPhoto();
-// console.log(viewedArray);
-
-
-// build click listener 
 
 // event.target.currentSRC // referencing image clicked 
