@@ -118,7 +118,7 @@ function handleClick(event) {
     updateVotes();
 
     // display the chart
-    // renderChart();
+    renderChart();
   } else {
     // if less than 10, display a new set of random goat images
     randomPhoto();
@@ -131,7 +131,7 @@ function showResults(){
     // create the element(li)
     var listItemElement = document.createElement('li');
     // give it content
-    listItemElement.textContent = Products.allProducts[i].name + '  has' + Products.allProducts[i].votes + ' votes and was displayed ' + Products.allProducts[i].timesDisplayed + ' times.';
+    listItemElement.textContent = Products.allProducts[i].name + ' has ' + Products.allProducts[i].votes + ' votes and was displayed ' + Products.allProducts[i].timesDisplayed + ' times.';
 
     //append to its parent element
     unorderedListElement.appendChild(listItemElement);
@@ -153,30 +153,30 @@ sectionElement.addEventListener('click', handleClick);
 randomPhoto();
 
 ////////////////////////////////////////////////////////////
-// function renderChart(){
-//   // access teh canvas element from the DOM
-//   var context = document.getElementById('product-chart').getContext('2d');
+function renderChart(){
+  // access teh canvas element from the DOM
+  var context = document.getElementById('product-chart').getContext('2d');
 
-//   var arrayOfColors = ['red', 'green', 'yellow', 'Purple', 'Orange'];
+  var arrayOfColors = ['red', 'green', 'yellow', 'Purple', 'Orange', 'red', 'green', 'yellow', 'Purple', 'Orange', 'red', 'green', 'yellow', 'Purple', 'Orange', 'red', 'green', 'yellow', 'Purple', 'Orange'];
 
-//   new Chart(context, {
-//     type: 'bar',
-//     data: {
-//       labels: photoNames,
-//       datasets:[{
-//         label: 'Votes Per Photo',
-//         data: photoVotes,
-//         backgroundColor: arrayOfColors,
-//       }]
-//     },
-//     options:{
-//       scales:{
-//         yAxes:[{
-//           ticks:{
-//             beginAtZero: true
-//           }
-//         }]
-//       }
-//     }
-//   });
-// }
+  new Chart(context, {
+    type: 'bar',
+    data: {
+      labels: photoNames,
+      datasets:[{
+        label: 'Votes Per Photo',
+        data: photoVotes,
+        backgroundColor: arrayOfColors,
+      }]
+    },
+    options:{
+      scales:{
+        yAxes:[{
+          ticks:{
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+  });
+}
