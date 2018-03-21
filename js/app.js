@@ -121,7 +121,7 @@ function handleClick(event) {
   }
 
   // check the click counter
-  if(Products.totalClicks > 25) {
+  if(Products.totalClicks > 24) {
     // turn off event listener
     sectionElement.removeEventListener('click', handleClick);
 
@@ -133,6 +133,9 @@ function handleClick(event) {
 
     // display the chart
     renderChart();
+
+    //write data to local storage
+    finish();
   } else {
     // if less than 10, display a new set of random goat images
     randomPhoto();
@@ -163,11 +166,13 @@ function updateVotes(){
 // add event listener to the section, replaces an event listener on each item
 sectionElement.addEventListener('click', handleClick);
 
+// call picture
+setupProducts();
+
 //render images on page load
 randomPhoto();
 
-// call picture
-// setupPictures();
+
 
 ////////////////////////////////////////////////////////////
 function renderChart(){
@@ -200,9 +205,6 @@ function renderChart(){
 
 function finish(){
   // save to LS
-  //
-  var savePictures = JSON.stringify(Picture.allPictures);
-
-  // save to local storage
-  localStorage.setItem();
+  var savePictures = JSON.stringify(Products.allProducts);
+  localStorage.setItem('products', savePictures);
 }
