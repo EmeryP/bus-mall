@@ -13,10 +13,11 @@ body{
 #results{
   float: left;
   margin: 30px;
-  width: 300px;
-  max-height: 600px
+  width: 500px;
+  height: 600px;
   border: 3px solid black;
 }
+
 h3{
   float: left;
 }
@@ -24,4 +25,9 @@ h3{
 img{
   max-width: 300px;
   max-height: 350px;
+}
+
+canvas{
+  height: 400px;
+  width: 600px;
 }

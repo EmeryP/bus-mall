@@ -63,11 +63,6 @@ new Products('img/usb.gif', 'usb');
 new Products('img/water-can.jpg', 'water-can');
 new Products('img/wine-glass.jpg', 'wine-glass');
 
-// add an event listener
-viewedArray[0].addEventListener('click', randomPhoto);
-viewedArray[1].addEventListener('click', randomPhoto);
-viewedArray[2].addEventListener('click', randomPhoto);
-
 //////////////////////////////////////////////////////////////////////////////////////
 
 // function to run when random photo is called
@@ -91,9 +86,7 @@ function randomPhoto(){
   //updates last indicies to equal random indicies so it can be referenced on next call
   lastIndices = randomIndices;
   //updates timesDisplayed counter by referencing randomIndex
-  // Products.allProducts[randomIndex].timesDisplayed++;
   Products.allProducts[randomIndex].timesDisplayed++;
-  
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -114,7 +107,7 @@ function handleClick(event) {
   }
 
   // check the click counter
-  if(Products.totalClicks > 9) {
+  if(Products.totalClicks > 25) {
     // turn off event listener
     sectionElement.removeEventListener('click', handleClick);
 
@@ -132,7 +125,7 @@ function handleClick(event) {
   }
 }
 ///////////////////////////////////////////////////////////////
-
+// create element, create content, append to ul for each instance of Products.allProducts array
 function showResults(){
   for(var i in Products.allProducts) {
     // create the element(li)
@@ -145,6 +138,7 @@ function showResults(){
   }
 }
 ////////////////////////////////////////////////////////////
+// counts a vote for each file path that is associated with the value at each index during the array iteration
 function updateVotes(){
   for(var i in Products.allProducts) {
     photoVotes[i] = Products.allProducts[i].votes;
@@ -152,10 +146,37 @@ function updateVotes(){
 }
 ////////////////////////////////////////////////////////////
 
-// add event listener to the section
+// add event listener to the section, replaces an event listener on each item
 sectionElement.addEventListener('click', handleClick);
 
 //render images on page load
 randomPhoto();
 
-// event.target.currentSRC // referencing image clicked 
+////////////////////////////////////////////////////////////
+// function renderChart(){
+//   // access teh canvas element from the DOM
+//   var context = document.getElementById('product-chart').getContext('2d');
+
+//   var arrayOfColors = ['red', 'green', 'yellow', 'Purple', 'Orange'];
+
+//   new Chart(context, {
+//     type: 'bar',
+//     data: {
+//       labels: photoNames,
+//       datasets:[{
+//         label: 'Votes Per Photo',
+//         data: photoVotes,
+//         backgroundColor: arrayOfColors,
+//       }]
+//     },
+//     options:{
+//       scales:{
+//         yAxes:[{
+//           ticks:{
+//             beginAtZero: true
+//           }
+//         }]
+//       }
+//     }
+//   });
+// }
