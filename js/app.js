@@ -40,29 +40,43 @@ function Products(filepath, name){
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+// function stores data to local storage
+function setupProducts(){
 
-// new instances of photos
-new Products('img/bag.jpg', 'bag'); //store views, clicks, id, in separate var and place here
-new Products('img/banana.jpg', 'banana');
-new Products('img/bathroom.jpg', 'bathroom');
-new Products('img/boots.jpg', 'boots');
-new Products('img/breakfast.jpg', 'breakfast');
-new Products('img/bubblegum.jpg', 'bubblegum');
-new Products('img/chair.jpg', 'chair');
-new Products('img/cthulhu.jpg', 'cthulhu');
-new Products('img/dog-duck.jpg', 'dog-duck');
-new Products('img/dragon.jpg', 'dragon');
-new Products('img/pen.jpg', 'pen');
-new Products('img/pet-sweep.jpg', 'pet-sweep');
-new Products('img/scissors.jpg', 'scissors');
-new Products('img/shark.jpg', 'shark');
-new Products('img/sweep.png', 'sweep');
-new Products('img/tauntaun.jpg', 'tauntaun');
-new Products('img/unicorn.jpg', 'unicorn');
-new Products('img/usb.gif', 'usb');
-new Products('img/water-can.jpg', 'water-can');
-new Products('img/wine-glass.jpg', 'wine-glass');
+  var picsAsString = localStorage.getItem('products'); //assigning picsAsString the value of local storages pictures
+  var useablePics = JSON.parse(picsAsString); //parsing pictures from JSON string
+  if (useablePics && useablePics.length) { //if useable and the length
+    Products.allProducts = useablePics; //
+    console.log('Loaded from Local Storage');
+    return; //quit the function
+  } //if false, function doesnt work browser will continue on to new line because no ELSE statement
 
+  //////////////////////////////////////////////////////////////////////////
+
+  console.log('doing it the hard way');
+
+  // new instances of photos
+  new Products('img/bag.jpg', 'bag'); //store views, clicks, id, in separate var and place here
+  new Products('img/banana.jpg', 'banana');
+  new Products('img/bathroom.jpg', 'bathroom');
+  new Products('img/boots.jpg', 'boots');
+  new Products('img/breakfast.jpg', 'breakfast');
+  new Products('img/bubblegum.jpg', 'bubblegum');
+  new Products('img/chair.jpg', 'chair');
+  new Products('img/cthulhu.jpg', 'cthulhu');
+  new Products('img/dog-duck.jpg', 'dog-duck');
+  new Products('img/dragon.jpg', 'dragon');
+  new Products('img/pen.jpg', 'pen');
+  new Products('img/pet-sweep.jpg', 'pet-sweep');
+  new Products('img/scissors.jpg', 'scissors');
+  new Products('img/shark.jpg', 'shark');
+  new Products('img/sweep.png', 'sweep');
+  new Products('img/tauntaun.jpg', 'tauntaun');
+  new Products('img/unicorn.jpg', 'unicorn');
+  new Products('img/usb.gif', 'usb');
+  new Products('img/water-can.jpg', 'water-can');
+  new Products('img/wine-glass.jpg', 'wine-glass');
+}
 //////////////////////////////////////////////////////////////////////////////////////
 
 // function to run when random photo is called
@@ -152,6 +166,9 @@ sectionElement.addEventListener('click', handleClick);
 //render images on page load
 randomPhoto();
 
+// call picture
+// setupPictures();
+
 ////////////////////////////////////////////////////////////
 function renderChart(){
   // access teh canvas element from the DOM
@@ -179,4 +196,13 @@ function renderChart(){
       }
     }
   });
+}
+
+function finish(){
+  // save to LS
+  //
+  var savePictures = JSON.stringify(Picture.allPictures);
+
+  // save to local storage
+  localStorage.setItem();
 }
