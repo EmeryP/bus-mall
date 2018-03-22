@@ -43,7 +43,7 @@ function Products(filepath, name){
 // function stores data to local storage
 function setupProducts(){
 
-  var picsAsString = localStorage.getItem('products'); //assigning picsAsString the value of local storages pictures
+  var picsAsString = localStorage.getItem('product-section'); //assigning picsAsString the value of local storages pictures
   var useablePics = JSON.parse(picsAsString); //parsing pictures from JSON string
   if (useablePics && useablePics.length) { //if useable and the length
     Products.allProducts = useablePics; //
@@ -121,15 +121,18 @@ function handleClick(event) {
   }
 
   // check the click counter
-  if(Products.totalClicks > 25) {
+  if(Products.totalClicks > 24) {
     // turn off event listener
     sectionElement.removeEventListener('click', handleClick);
 
-    // if greater than 9, display results as a list
-    showResults();
+    // if greater than 24, display results as a list
+    // showResults();
 
-    // updates the votes per goat for chart
+    // updates the votes per product for chart
     updateVotes();
+
+    //write data to local storage, after all other code runs
+    finish();
 
     // display the chart
     renderChart();
@@ -163,33 +166,49 @@ function updateVotes(){
 // add event listener to the section, replaces an event listener on each item
 sectionElement.addEventListener('click', handleClick);
 
+// call picture
+setupProducts();
+
 //render images on page load
 randomPhoto();
 
-// call picture
-// setupPictures();
-
 ////////////////////////////////////////////////////////////
 function renderChart(){
+
+  var colors = [];
+  var labels = [];
+  var voteData = [];
+
+  for (var i = 0; i < Products.allProducts.length; i++) {
+
+    labels.push(Products.allProducts[i].name);
+    var pct = Math.round(Products.allProducts[i].votes/Products.allProducts[i].timesDisplayed * 100);
+    voteData.push(pct);
+
+    var randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16); //creates random color
+    colors.push(randomColor);
+  }
+
   // access teh canvas element from the DOM
   var context = document.getElementById('product-chart').getContext('2d');
-
-  var arrayOfColors = ['red', 'green', 'yellow', 'Purple', 'Orange', 'red', 'green', 'yellow', 'Purple', 'Orange', 'red', 'green', 'yellow', 'Purple', 'Orange', 'red', 'green', 'yellow', 'Purple', 'Orange'];
+  document.getElementById('product-chart').setAttribute('class', ''); //grab element, set attribute to overrides class attribute 
+  
 
   new Chart(context, {
     type: 'bar',
     data: {
-      labels: photoNames,
+      labels: labels,
       datasets:[{
-        label: 'Votes Per Photo',
-        data: photoVotes,
-        backgroundColor: arrayOfColors,
+        label: 'Popularity of (% of clicks)',
+        data: voteData,
+        backgroundColor: colors
       }]
     },
     options:{
       scales:{
         yAxes:[{
           ticks:{
+            stepSize: 50,
             beginAtZero: true
           }
         }]
@@ -200,9 +219,6 @@ function renderChart(){
 
 function finish(){
   // save to LS
-  //
-  var savePictures = JSON.stringify(Picture.allPictures);
-
-  // save to local storage
-  localStorage.setItem();
+  var savePictures = JSON.stringify(Products.allProducts);
+  localStorage.setItem('products', savePictures);
 }
