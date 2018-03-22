@@ -25,7 +25,13 @@ body{
 }
 
 .imgPic:hover{
-  opacity: 0.3;
+  /* opacity: 0.3; */
+  /* transform: scale(1.2);   */
+  /* transform: rotateZ(360deg); */
+  /* transition-duration: 5s; */
+  /* border-radius: 50%; */
+  animation: swing 1s ease;
+  animation-iteration-count: 1;
 }
 
 .hide{
@@ -47,7 +53,7 @@ h3{
 #product-chart{
   height: 500px;
   max-width: 750px;
-  border: 20px solid blue; 
+  border: 20px solid #f2d676; 
   margin: 30px auto;
   border-radius: 20px;
 }
