@@ -1,4 +1,8 @@
 
+html{
+  height: 100%;
+}
+
 body{
   background: linear-gradient(to bottom, #f2d674 , white);
 }
@@ -9,15 +13,24 @@ body{
   margin-left: 100px;
   width: 300px;
   height: 250px;
+}
+
+.imgPic{
+  max-width: 300px;
+  vertical-align: middle;
+  object-fit: contain;
+  object-position: left bottom;
   border: 3px solid black;
-  background: white;
-  /* border-radius: 50%; */
+  border-radius: 10px;    
 }
 
-imgPic{
-    z-index: -1;
+.imgPic:hover{
+  opacity: 0.3;
 }
 
+.hide{
+  display: none;
+}
 
 h1{
   font-size: 30px;
@@ -31,29 +44,21 @@ h3{
   float: left;
 }
 
-main img{
-  max-width: 300px;
-  max-height: 250px;
-  vertical-align: middle;
+#product-chart{
+  height: 500px;
+  max-width: 750px;
+  border: 20px solid blue; 
+  margin: 30px auto;
+  border-radius: 20px;
 }
 
-canvas{
-  height: 400px;
-  width: 600px;
-}
-
-#pics{
-  text-align: center;  
-}
-
-#listResults{
+/* #listResults{
   margin: 30px auto;
   width: 500px;
   height: 600px;
   border: 3px solid black;
   overflow: hidden;
-  
-}
+} */
 
 ul li{
   text-align: left;
