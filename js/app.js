@@ -131,11 +131,12 @@ function handleClick(event) {
     // updates the votes per product for chart
     updateVotes();
 
+    // display the chart
+    renderChart();
+
     //write data to local storage, after all other code runs
     finish();
 
-    // display the chart
-    renderChart();
   } else {
     // if less than 10, display a new set of random goat images
     randomPhoto();
@@ -143,17 +144,17 @@ function handleClick(event) {
 }
 ///////////////////////////////////////////////////////////////
 // create element, create content, append to ul for each instance of Products.allProducts array
-function showResults(){
-  for(var i in Products.allProducts) {
-    // create the element(li)
-    var listItemElement = document.createElement('li');
-    // give it content
-    listItemElement.textContent = Products.allProducts[i].name + ' has ' + Products.allProducts[i].votes + ' votes and was displayed ' + Products.allProducts[i].timesDisplayed + ' times.';
+// function showResults(){
+//   for(var i in Products.allProducts) {
+//     // create the element(li)
+//     var listItemElement = document.createElement('li');
+//     // give it content
+//     listItemElement.textContent = Products.allProducts[i].name + ' has ' + Products.allProducts[i].votes + ' votes and was displayed ' + Products.allProducts[i].timesDisplayed + ' times.';
 
-    //append to its parent element
-    unorderedListElement.appendChild(listItemElement);
-  }
-}
+//     //append to its parent element
+//     unorderedListElement.appendChild(listItemElement);
+//   }
+// }
 ////////////////////////////////////////////////////////////
 // counts a vote for each file path that is associated with the value at each index during the array iteration
 function updateVotes(){
@@ -209,7 +210,13 @@ function renderChart(){
         yAxes:[{
           ticks:{
             stepSize: 50,
+            autoSkip: false,
             beginAtZero: true
+          }
+        }],
+        xAxes:[{
+          ticks:{
+            autoSkip: false
           }
         }]
       }
