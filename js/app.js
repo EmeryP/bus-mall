@@ -43,7 +43,7 @@ function Products(filepath, name){
 // function stores data to local storage
 function setupProducts(){
 
-  var picsAsString = localStorage.getItem('product-section'); //assigning picsAsString the value of local storages pictures
+  var picsAsString = localStorage.getItem('products'); //assigning picsAsString the value of local storages pictures
   var useablePics = JSON.parse(picsAsString); //parsing pictures from JSON string
   if (useablePics && useablePics.length) { //if useable and the length
     Products.allProducts = useablePics; //
@@ -56,7 +56,7 @@ function setupProducts(){
   console.log('doing it the hard way');
 
   // new instances of photos
-  new Products('img/bag.jpg', 'bag'); //store views, clicks, id, in separate var and place here
+  new Products('img/bag.jpg', 'bag'); 
   new Products('img/banana.jpg', 'banana');
   new Products('img/bathroom.jpg', 'bathroom');
   new Products('img/boots.jpg', 'boots');
@@ -107,6 +107,7 @@ function randomPhoto(){
 
 // function to call upon click event
 function handleClick(event) {
+  
   // increment click counter
   Products.totalClicks++;
 
@@ -119,11 +120,13 @@ function handleClick(event) {
       Products.allProducts[i].votes++;
     }
   }
+  
 
   // check the click counter
   if(Products.totalClicks > 24) {
     // turn off event listener
     sectionElement.removeEventListener('click', handleClick);
+    
 
     // if greater than 24, display results as a list
     // showResults();
@@ -131,17 +134,21 @@ function handleClick(event) {
     // updates the votes per product for chart
     updateVotes();
 
+    // display the chart
+    renderChart();
+
     //write data to local storage, after all other code runs
     finish();
 
-    // display the chart
-    renderChart();
+    alert('Thank you for being a part of our survey! Click \'Ok\' to see your results');
+
   } else {
     // if less than 10, display a new set of random goat images
     randomPhoto();
   }
 }
 ///////////////////////////////////////////////////////////////
+
 // create element, create content, append to ul for each instance of Products.allProducts array
 function showResults(){
   for(var i in Products.allProducts) {
@@ -155,6 +162,7 @@ function showResults(){
   }
 }
 ////////////////////////////////////////////////////////////
+
 // counts a vote for each file path that is associated with the value at each index during the array iteration
 function updateVotes(){
   for(var i in Products.allProducts) {
@@ -162,7 +170,6 @@ function updateVotes(){
   }
 }
 ////////////////////////////////////////////////////////////
-
 // add event listener to the section, replaces an event listener on each item
 sectionElement.addEventListener('click', handleClick);
 
@@ -171,8 +178,9 @@ setupProducts();
 
 //render images on page load
 randomPhoto();
-
+alert('Welcome to the Bus Mall survey, help us by selecting 25 of your favorite products');
 ////////////////////////////////////////////////////////////
+
 function renderChart(){
 
   var colors = [];
@@ -189,17 +197,17 @@ function renderChart(){
     colors.push(randomColor);
   }
 
-  // access teh canvas element from the DOM
+  // access the canvas element from the DOM
   var context = document.getElementById('product-chart').getContext('2d');
-  document.getElementById('product-chart').setAttribute('class', ''); //grab element, set attribute to overrides class attribute 
-  
+  document.getElementById('product-chart').setAttribute('class', ''); //grab element, set attribute to overrides class attribute
+  document.getElementById('chart-description').setAttribute('class', '');
 
   new Chart(context, {
     type: 'bar',
     data: {
       labels: labels,
       datasets:[{
-        label: 'Popularity of (% of clicks)',
+        label: 'Products chosen/products viewed - as %',
         data: voteData,
         backgroundColor: colors
       }]
@@ -209,7 +217,13 @@ function renderChart(){
         yAxes:[{
           ticks:{
             stepSize: 50,
+            autoSkip: false,
             beginAtZero: true
+          }
+        }],
+        xAxes:[{
+          ticks:{
+            autoSkip: false
           }
         }]
       }
