@@ -107,6 +107,7 @@ function randomPhoto(){
 
 // function to call upon click event
 function handleClick(event) {
+  
   // increment click counter
   Products.totalClicks++;
 
@@ -119,11 +120,13 @@ function handleClick(event) {
       Products.allProducts[i].votes++;
     }
   }
+  
 
   // check the click counter
   if(Products.totalClicks > 24) {
     // turn off event listener
     sectionElement.removeEventListener('click', handleClick);
+    
 
     // if greater than 24, display results as a list
     // showResults();
@@ -167,7 +170,6 @@ function updateVotes(){
   }
 }
 ////////////////////////////////////////////////////////////
-
 // add event listener to the section, replaces an event listener on each item
 sectionElement.addEventListener('click', handleClick);
 
@@ -176,6 +178,7 @@ setupProducts();
 
 //render images on page load
 randomPhoto();
+alert('Welcome to the Bus Mall survey, help us by selecting 25 of your favorite products');
 ////////////////////////////////////////////////////////////
 
 function renderChart(){
