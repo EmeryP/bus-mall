@@ -5,10 +5,11 @@
 
 html{
   height: 100%;
+  background: linear-gradient(to bottom, #f2d674 , white);
 }
 
 body{
-  background: linear-gradient(to bottom, #f2d674 , white);
+  /* background: linear-gradient(to bottom, #f2d674 , white); */
 }
 
 section{
@@ -17,7 +18,7 @@ section{
 
 .imgPlace1{
   float: left;
-  overflow: hidden;
+  /* overflow: hidden; */
   margin-left: 5%;
   width: 30%;
   height: 100%;
@@ -25,14 +26,14 @@ section{
 
 .imgPlace2{
   float: left;
-  overflow: hidden;
+  /* overflow: hidden; */
   margin-left: 5%;
   width: 30%;
   height: 100%;
 }
 .imgPlace3{
   float: left;
-  overflow: hidden;
+  /* overflow: hidden; */
   width: 30%;
   height: 100%;
 }
@@ -69,10 +70,10 @@ section{
 
 h1{
   font-size: 30px;
-  font-weight: bold;
+  font-weight: 700;
+  margin-top: 20px;
   text-align: center;
-  margin-top: 50px;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 
 h3{
@@ -87,6 +88,33 @@ h3{
   position: absolute; bottom: 0px; 
   border-radius: 20px;  
 }
+
+#bus{
+  height: 50px;
+  opacity: .5;
+  border-radius: 10px;
+  margin: 1% 1% 0px 1%;
+}
+
+span{
+  font-size: 25px;
+  font-weight: 700;
+  font-style: italic;
+  font-family: 'Open Sans', sans-serif;
+  text-decoration: underline;
+  color: #0777c1; 
+}
+
+#chart-description{
+  width: 20%;
+  float: right;
+  margin: 30px 20px 0px 20px;
+  color: #e52b44;
+  font-style: normal;
+  text-decoration: none;
+  font-size: 16px;
+}
+
 
 /* #listResults{
   margin: 30px auto;

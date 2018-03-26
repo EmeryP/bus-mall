@@ -56,7 +56,7 @@ function setupProducts(){
   console.log('doing it the hard way');
 
   // new instances of photos
-  new Products('img/bag.jpg', 'bag'); //store views, clicks, id, in separate var and place here
+  new Products('img/bag.jpg', 'bag'); 
   new Products('img/banana.jpg', 'banana');
   new Products('img/bathroom.jpg', 'bathroom');
   new Products('img/boots.jpg', 'boots');
@@ -137,12 +137,15 @@ function handleClick(event) {
     //write data to local storage, after all other code runs
     finish();
 
+    alert('Thank you for being a part of our survey! Click \'Ok\' to see your results');
+
   } else {
     // if less than 10, display a new set of random goat images
     randomPhoto();
   }
 }
 ///////////////////////////////////////////////////////////////
+
 // create element, create content, append to ul for each instance of Products.allProducts array
 function showResults(){
   for(var i in Products.allProducts) {
@@ -156,6 +159,7 @@ function showResults(){
   }
 }
 ////////////////////////////////////////////////////////////
+
 // counts a vote for each file path that is associated with the value at each index during the array iteration
 function updateVotes(){
   for(var i in Products.allProducts) {
@@ -172,7 +176,6 @@ setupProducts();
 
 //render images on page load
 randomPhoto();
-
 ////////////////////////////////////////////////////////////
 
 function renderChart(){
@@ -194,13 +197,14 @@ function renderChart(){
   // access the canvas element from the DOM
   var context = document.getElementById('product-chart').getContext('2d');
   document.getElementById('product-chart').setAttribute('class', ''); //grab element, set attribute to overrides class attribute
+  document.getElementById('chart-description').setAttribute('class', '');
 
   new Chart(context, {
     type: 'bar',
     data: {
       labels: labels,
       datasets:[{
-        label: 'Popularity of (% of clicks)',
+        label: 'Products chosen/products viewed - as %',
         data: voteData,
         backgroundColor: colors
       }]
