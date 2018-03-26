@@ -125,18 +125,17 @@ function handleClick(event) {
     // turn off event listener
     sectionElement.removeEventListener('click', handleClick);
 
-    // if greater than 24, display results as a list
-    // showResults();
+    // if greater than 9, display results as a list
+    showResults();
 
-    // updates the votes per product for chart
+    // updates the votes per goat for chart
     updateVotes();
 
     // display the chart
     renderChart();
 
-    //write data to local storage, after all other code runs
+    //write data to local storage
     finish();
-
   } else {
     // if less than 10, display a new set of random goat images
     randomPhoto();
@@ -173,50 +172,30 @@ setupProducts();
 //render images on page load
 randomPhoto();
 
+
+
 ////////////////////////////////////////////////////////////
-
 function renderChart(){
-
-  var colors = [];
-  var labels = [];
-  var voteData = [];
-
-  for (var i = 0; i < Products.allProducts.length; i++) {
-
-    labels.push(Products.allProducts[i].name);
-    var pct = Math.round(Products.allProducts[i].votes/Products.allProducts[i].timesDisplayed * 100);
-    voteData.push(pct);
-
-    var randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16); //creates random color
-    colors.push(randomColor);
-  }
-
-  // access the canvas element from the DOM
+  // access teh canvas element from the DOM
   var context = document.getElementById('product-chart').getContext('2d');
-  document.getElementById('product-chart').setAttribute('class', ''); //grab element, set attribute to overrides class attribute
+
+  var arrayOfColors = ['red', 'green', 'yellow', 'Purple', 'Orange', 'red', 'green', 'yellow', 'Purple', 'Orange', 'red', 'green', 'yellow', 'Purple', 'Orange', 'red', 'green', 'yellow', 'Purple', 'Orange'];
 
   new Chart(context, {
     type: 'bar',
     data: {
-      labels: labels,
+      labels: photoNames,
       datasets:[{
-        label: 'Popularity of (% of clicks)',
-        data: voteData,
-        backgroundColor: colors
+        label: 'Votes Per Photo',
+        data: photoVotes,
+        backgroundColor: arrayOfColors,
       }]
     },
     options:{
       scales:{
         yAxes:[{
           ticks:{
-            stepSize: 50,
-            autoSkip: false,
             beginAtZero: true
-          }
-        }],
-        xAxes:[{
-          ticks:{
-            autoSkip: false
           }
         }]
       }
